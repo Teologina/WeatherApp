@@ -3,8 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Weather.Views.ForecastPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label>Your code to present the weather data for example in a ListView</Label>
+        <StackLayout Margin="0,10,0,0">
+            <Button x:Name="RefreshButton" Text="Refresh" Clicked="RefreshButton_Clicked"/>
+            <ListView x:Name="CustomList" BackgroundColor="White" IsGroupingEnabled="True" HasUnevenRows="True" >
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="40">
+                            <StackLayout  HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="White"
+                                  Orientation="Horizontal">
+                                <Label FontSize="25" TextColor="Blue" FontAttributes="Bold" VerticalOptions="Center" Text="{Binding Key}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout HorizontalOptions="Fill" BackgroundColor="Beige" Margin="0,10,0,2"
+                                        Orientation="Horizontal">
+                                <Image x:Name="listPic" Source="{Binding Icon}" HorizontalOptions="Center" HeightRequest="100" WidthRequest="50"/>
+                                <StackLayout HorizontalOptions="Start"  VerticalOptions="Start"
+                                        Orientation="Horizontal">
+                                    <Label HorizontalOptions="Start" FontSize="18"
+                                        FontAttributes="Bold" TextColor="Red" Text="{Binding DateTime, StringFormat='{0:HH:mm}'}" Margin="5"/>
+                                    <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand" HorizontalOptions="StartAndExpand" >
+                                    <Label Text="{Binding Description, StringFormat='{0}, '}" FontSize="15" TextColor="Red"/>
+                                    <Label Text="{Binding Temperature, StringFormat='{0} degC, '}" FontSize="15" TextColor="Red"/>
+                                    <Label Text="{Binding WindSpeed, StringFormat='wind {0}'}" FontSize="15" TextColor="Red"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
